@@ -1,5 +1,28 @@
 # Vue 3 + Vite
 ## 项目目录设计
+|-- mannager-fe
+    |-- .gitignore
+    |-- index.html
+    |-- package-lock.json
+    |-- package.json
+    |-- README.md
+    |-- vite.config.js
+    |-- .vscode
+    |   |-- extensions.json
+    |-- public
+    |   |-- favicon.ico
+    |-- src
+        |-- App.vue
+        |-- main.js
+        |-- api
+        |-- assets
+        |   |-- logo.png
+        |-- config
+        |-- router
+        |-- uitls
+        |-- views
+
+
 manager-fe  项目
   dist    打包生成目录
   node_modules 模块依赖
