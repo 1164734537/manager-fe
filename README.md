@@ -1,5 +1,6 @@
 # Vue 3 + Vite
 ## 项目目录设计
+---
 |-- mannager-fe
     |-- .gitignore
     |-- index.html
@@ -45,4 +46,4 @@ manager-fe  项目
 	index.html  html页面入口
 	package.json    依赖包管理
 	vite.config.js  vite配置管理
-
+---
