@@ -6,5 +6,6 @@ export default {
     name:'App'
 }
 </script>
-<style>
+<style lang="scss">
+    @import "./assets/style/reset.css";
 </style>
