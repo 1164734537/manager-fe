@@ -7,7 +7,6 @@ import { ElMessage } from "element-plus"
 import router from "./../router"
 const TOKEN_INVALID = 'Token认证失败，请重新登录'
 const NETWORK_ERROR = '网络请求异常，请稍后重试'
-
 // 创建axios实例对象，添加全局配置
 const service = axios.create({
     baseURL: config.baseApi,
@@ -42,17 +41,22 @@ service.interceptors.response.use((res)=>{
 /**
  * 请求核心函数
  * @param {*} options 请求配置
+ * url
+ * data
+ * method
  * 
  */
 function request(options) {
-    options.methods = options.methods || 'get';
-    if(options.methods.toLowerCase() === 'get'){
+    let isMock = config.mock;
+    if (typeof options.mock != 'undefined') isMock = mock;
+    options.method = options.method || 'get';
+    if(options.method.toLowerCase() === 'get'){
         options.params = options.data;
     }
     if(config.env === 'prod'){
         service.defaults.baseURL = config.baseApi;
     }else{
-        service.defaults.baseURL = config.mock ? config.mockApi : config.baseApi;
+        service.defaults.baseURL = isMock ? config.mockApi : config.baseApi;
     }
     return service(options)
 }
@@ -61,7 +65,7 @@ function request(options) {
         return request({
             url,
             data,
-            methods:item,
+            method:item,
             ...options
         })
     }
