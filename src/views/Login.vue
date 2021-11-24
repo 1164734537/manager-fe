@@ -47,23 +47,6 @@ export default {
             }
         }
     },
-    mounted() {
-        // this.$request.get('/login').then((res)=>{
-        //     console.log(res)
-        // })
-        // this.$request({
-        //     url:'/users/login',
-        //     data:'123',
-        //     method:'post'
-        // }).then((res)=>{
-        //     console.log(res)
-        // })
-        // this.$request.post('/users/login','123')
-        // .then((res)=>{
-        //     console.log(res)
-        // })
-
-    },
     methods:{
         login(){
             this.$refs.userForm.validate((valid)=>{
@@ -71,8 +54,12 @@ export default {
                 if(valid){
                     // 接口提交
                    this.$api.login(this.user)
-                    .then((res)=>{
-                        console.log(res)
+                    .then(async(res)=>{
+                        // console.log(res)
+                        //1.保存用户信息 vuex
+                        this.$store.commit('saveUserInfo',res)
+                        //2.跳转到欢迎界面
+                        this.$router.push('/welcome')
                     })
                 }else{
                     return false;
