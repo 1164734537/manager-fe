@@ -14,7 +14,7 @@
                 <el-icon class="view_icon">
                     <View />
                 </el-icon>
-                    <el-input type="password" class="inp_view" v-model="user.userPwd"></el-input>
+                    <el-input type="password" class="inp_view" v-model="user.userPwd" @keyup.enter="login()"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" class="btn-login" @click="login">登录</el-button>
