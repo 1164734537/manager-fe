@@ -47,7 +47,7 @@
                 </div>
                 
                 <div class="user-info">
-                    <el-badge is-dot="true" class="notice" type="danger" :hidden='isHidden' @click="handlehidden">
+                    <el-badge :is-dot = "this.noticeCount>0? true:false" class="notice" type="danger"  >
                         <el-icon><Bell /></el-icon>
                     </el-badge>
                     <el-dropdown class="user" @command="handleCommand">
@@ -82,10 +82,13 @@ export default {
     },
     data(){
         return {
-            isHidden:true,
             isCollapse:false,
-            userInfo:this.$store.state.userInfo
+            userInfo:this.$store.state.userInfo,
+            noticeCount: 0
         }
+    },
+    mounted() {
+        this.getNoticeCount()
     },
     methods:{
         handleCommand(command){
@@ -100,11 +103,12 @@ export default {
             this.$store.commit('saveUserInfo','');
             this.$router.push('/login');
         },
-        handlehidden(){
-            this.isHidden = !this.isHidden
-        },
         toggle(){
             this.isCollapse = !this.isCollapse
+        },
+        async getNoticeCount(){
+            const count = await this.$api.noticeCount();
+            this.noticeCount = count;
         }
 
     }
