@@ -3,9 +3,16 @@
 </template>
 <script>
 export default {
-    name:'App'
+    name:'App',
+    mounted() {
+         let userInfo = this.$storage.getItem('userInfo')
+         if(!userInfo){
+             this.$router.push('/login')
+         }
+    },
 }
 </script>
 <style lang="scss">
     @import "./assets/style/reset.css";
+    @import "./assets/style/index.scss";
 </style>

@@ -13,26 +13,12 @@
                         class="nav-menu"
                         background-color="#001529"
                         text-color="#fff"
-                        router = true
+                        router
                         :collapse="isCollapse"
-                        collapse-transition = true
+                        :collapse-transition = true
+                        :default-active="activeMenu"
                     >
-                        <el-sub-menu index="1">
-                            <template #title>
-                                <el-icon><Tools /></el-icon>
-                                <span>系统管理</span>
-                            </template>
-                            <el-menu-item index="1-1">用户管理</el-menu-item>
-                            <el-menu-item index="1-2">菜单管理</el-menu-item>
-                        </el-sub-menu>
-                        <el-sub-menu index="2">
-                            <template #title>
-                                <el-icon><Tools /></el-icon>
-                                <span>审批管理</span>
-                            </template>
-                            <el-menu-item index="2-1">休假申请</el-menu-item>
-                            <el-menu-item index="2-2">待我审批</el-menu-item>
-                        </el-sub-menu>
+                        <TreeMenu :userMenu="userMenu" />
                     </el-menu>
                 </el-col>
             </el-row>
@@ -43,7 +29,9 @@
                     <div class="nav-fold" @click="toggle()">
                         <el-icon><Fold /></el-icon>
                     </div>
-                    <div class="bread">面包屑</div>
+                    <div class="bread">
+                        <breadCrumb />
+                    </div>
                 </div>
                 
                 <div class="user-info">
@@ -73,22 +61,29 @@
 </template>
 <script>
 import {Tools,Fold,Bell} from '@element-plus/icons'
+import TreeMenu from './TreeMenu.vue';
+import breadCrumb from './breadCrumb.vue';
 export default {
     name:'Home',
     components:{
-        Tools,
-        Fold,
-        Bell
-    },
+    Tools,
+    Fold,
+    Bell,
+    TreeMenu,
+    breadCrumb
+},
     data(){
         return {
             isCollapse:false,
             userInfo:this.$store.state.userInfo,
-            noticeCount: 0
+            noticeCount: 0,
+            userMenu:[],
+            activeMenu: location.hash.slice(1)
         }
     },
     mounted() {
-        this.getNoticeCount()
+        this.getNoticeCount();
+        this.getMenuList();
     },
     methods:{
         handleCommand(command){
@@ -99,7 +94,6 @@ export default {
             // 1.清空vuex中的缓存，和当前userinfo
             //2.清空storage关于用户数据
             //3.跳转至登录页面
-            this.userInfo = null;
             this.$store.commit('saveUserInfo','');
             this.$router.push('/login');
         },
@@ -107,10 +101,22 @@ export default {
             this.isCollapse = !this.isCollapse
         },
         async getNoticeCount(){
-            const count = await this.$api.noticeCount();
-            this.noticeCount = count;
+            try {
+                const count = await this.$api.noticeCount();
+                this.noticeCount = count;
+            } catch (error) {
+               console.error(error)
+            }
+        },
+        async getMenuList(){
+            try {
+                const menulist = await this.$api.getMenuList();
+                this.userMenu = menulist;
+                // console.log(this.userMenu)
+            } catch (error) {
+               console.error(error)
+            }
         }
-
     }
 }
 </script>
@@ -124,8 +130,12 @@ export default {
             background-color:#001529;
             color: #fff;
             transition: width .5s;
+            overflow-y: auto;
             -webkit-backface-visibility: hidden;
             -webkit-transform-style: preserve-3d;
+            &::-webkit-scrollbar{
+                display: none;
+            }
             .logo{
                 display: flex;
                 align-items: center;
@@ -205,7 +215,7 @@ export default {
                 height: calc(100vh - 50px);
                 background-color:#eef0f3;
                 .main-page{
-                    background-color: #fff;
+                    // background-color: #fff;
                     height: 100%;
                     overflow-x: hidden;
                 }

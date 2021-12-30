@@ -2,7 +2,7 @@
  * storage 二次封装
  * 
 */
-import config from './../config'
+import config from '../config'
 export default {
     getStroage(){
         return JSON.parse(window.localStorage.getItem(config.namespace) || "{}")

@@ -6,6 +6,7 @@
             <div class="desc">-vue3.0 + elementPlus + node + Mongo 打造通用后台管理系统 </div>
         </div>
         <div class="img"></div>
+        <router-view></router-view>
     </div>
 </template>
 <script>
@@ -24,6 +25,7 @@ export default {
         align-items: center;
         justify-content: space-around;
         height: 100%;
+        background:#fff;
         .content{
             position: relative;
             bottom: 40px;

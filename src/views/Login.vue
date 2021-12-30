@@ -55,7 +55,7 @@ export default {
                     // 接口提交
                    this.$api.login(this.user)
                     .then(async(res)=>{
-                        // console.log(res)
+                        console.log(res)
                         //1.保存用户信息 vuex
                         this.$store.commit('saveUserInfo',res)
                         //2.跳转到欢迎界面
