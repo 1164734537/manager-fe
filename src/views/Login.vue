@@ -7,14 +7,14 @@
                     <el-icon class="user_icon">
                         <User />
                     </el-icon>
-                    <el-input type="text" class="inp_user" v-model="user.userName">
+                    <el-input type="text" class="inp_user" v-model.trim="user.userName">
                     </el-input>
                 </el-form-item>
                 <el-form-item  prop="userPwd">
                 <el-icon class="view_icon">
                     <View />
                 </el-icon>
-                    <el-input type="password" class="inp_view" v-model="user.userPwd" @keyup.enter="login()"></el-input>
+                    <el-input type="password" class="inp_view" v-model.trim="user.userPwd" @keyup.enter="login()"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" class="btn-login" @click="login">登录</el-button>

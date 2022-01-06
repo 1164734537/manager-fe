@@ -3,6 +3,7 @@
  */
 import request from './../utils/request'
 export default {
+    // 登录
     login(params) {
         return request({
             url: '/users/login',
@@ -10,6 +11,7 @@ export default {
             data: params
         })
     },
+    // 消息
     noticeCount(params) {
         return request({
             url: '/leave/count',
@@ -18,6 +20,7 @@ export default {
             mock:true
         })
     },
+    // 菜单列表
     getMenuList(params) {
         return request({
             url: '/menu/list',
@@ -26,7 +29,7 @@ export default {
             mock:true
         })
     },
-
+    // 用户列表
     getUserList(params) {
         return request({
             url: '/users/list',
@@ -34,6 +37,7 @@ export default {
             data: params,
         })
     },
+    // 用户删除
     userDel(params) {
         return request({
             url: '/users/delete',
@@ -41,6 +45,7 @@ export default {
             data: params
         })
     },
+    // 权限列表
     getRoleAllList() {
         return request({
             url: '/roles/allList',
@@ -49,6 +54,7 @@ export default {
             mock:true
         })
     },
+    // 部门列表
     getDeptList(params) {
         return request({
             url: '/dept/list',
@@ -57,11 +63,21 @@ export default {
             mock:true
         })
     },
+    // 用户列表提交
     userSubmit(params) {
         return request({
             url: '/users/operate',
             method: 'post',
             data: params
+        })
+    },
+    // 菜单列表提交
+    menuSubmit(params) {
+        return request({
+            url:'/menu/operate',
+            method:'post',
+            data:params,
+            mock:true
         })
     }
 }
