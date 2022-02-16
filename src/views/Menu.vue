@@ -16,7 +16,7 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="getMenuList">查询</el-button>
+                    <el-button type="primary" @click="getMenulist">查询</el-button>
                     <el-button @click="handleReset('form')">重置</el-button>
                 </el-form-item>
             </el-form>
@@ -260,10 +260,11 @@ export default {
             showModel.value = true
             proxy.$nextTick(()=>{
                 Object.assign(menuForm,row)
-                let { parentId , _id,menuState, menuType} = row
-                menuForm.parentId = [...parentId,_id].filter(Boolean)
-                menuForm.menuState = menuState - 0 
-                menuForm.menuType =  menuType - 0 
+                // console.log(menuForm)
+                // let { parentId , _id,menuState, menuType} = row
+                // menuForm.parentId = [...parentId,_id].filter(Boolean)
+                // menuForm.menuState = menuState - 0 
+                // menuForm.menuType =  menuType - 0 
                 // console.log(menuForm)
 
             })
@@ -281,6 +282,7 @@ export default {
                         action:trueaction
                     }
                     try {
+                        console.log(params)
                         const res = await proxy.$api.menuSubmit(params)
                         console.log('确认=>',res)
                         if(res){
@@ -326,7 +328,8 @@ export default {
                  action,
                  handleClose,
                  handleSubmit,
-                 showModel 
+                 showModel,
+                 getMenulist
                 }
     }
 }

@@ -25,8 +25,8 @@ export default {
         return request({
             url: '/menu/list',
             nethod: 'get',
-            data: {},
-            mock:true
+            data: params,
+            // mock:true
         })
     },
     // 用户列表
@@ -54,8 +54,17 @@ export default {
             mock:true
         })
     },
+    // 获取角色列表
+    getRoleList(params){
+        return request({
+            url: '/roles/list',
+            method: 'get',
+            data: params,
+            mock:true
+        })
+    },
     // 部门列表
-    getDeptList(params) {
+    getDeptList(params){
         return request({
             url: '/dept/list',
             method: 'get',
@@ -77,7 +86,8 @@ export default {
             url:'/menu/operate',
             method:'post',
             data:params,
-            mock:true
+            // mock:true
         })
-    }
+    },
+
 }
